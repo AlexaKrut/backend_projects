@@ -10,3 +10,15 @@ string getCurrentTime() {
     string currentTime = oss.str();
     return currentTime;
 }
+
+int getLastId(const string& filename) {
+    int maxId = 0;
+    vector<Task> tasks = parseJsonFile(filename);
+    for (const auto& task : tasks) {
+        if (task.id > maxId) {
+            maxId = task.id;
+        } 
+    }
+    return maxId;
+
+}

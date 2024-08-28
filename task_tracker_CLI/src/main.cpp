@@ -1,26 +1,46 @@
 #include <iostream>
 #include <string>
-#include "./include/cli.h"
+#include <vector>
+#include "../include/cli.h"
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
-    if (argc > 1) {
-        CLI TaskManager;
+struct CommandLineArgs {
+    string command;
+    vector<string> args;
+};
 
+CommandLineArgs parseCommandLineArgs(int argc, char* argv[]);
+
+int main(int argc, char* argv[]) {
+    CommandLineArgs args  = parseCommandLineArgs(argc, argv);
+    if (args.command.empty()) {
+        cout << "Error: No command specified." << endl;
     } else {
-        cout << "You need to choose an option!!!" << endl;
-        cout << "Format:  <./task_tracker_CLI option data>" << endl;
-        cout << "Option variants:" << endl;
-        cout << "1. Add - add a new task" << endl;
-        cout << "2. Update - update task" << endl;
-        cout << "3. Delete - delete task" << endl;
-        cout << "4. Mark-in-progress - mark a task as in progress" << endl;
-        cout << "5. Mark-done - mark a task as done" << endl;
-        cout << "6. List - list all tasks" << endl;
-        cout << "7. List-done - list all tasks that are done" << endl;
-        cout << "8. List-undone - list all tasks that are not done" << endl;
-        cout << "9. List-in-progress - list all tasks that are in progress" << endl;
+        CLI TaskManager;
+        if (args.command == "add") {TaskManager.addTask(args.args[0]);}
+        else if (args.command == "list"){TaskManager.listTasks();}
+        /*
+        else if (args.command == "update"){}
+        else if (args.command == "delete"){}        
+        else if (args.command == "mark-in-progress"){}
+        else if (args.command == "mark-done"){}
+
+        else if (args.command == "list-done"){}
+        else if (args.command == "list-todo"){}
+        else if (args.command == "list-in-progress"){}
+        */
+        else {cout << "Error: Not find this command. You need to choose one of existing commands." << endl;}
     }
-    return 0;
+}
+
+CommandLineArgs parseCommandLineArgs(int argc, char* argv[]) {
+    CommandLineArgs args;
+    if (argc > 1) {
+        args.command = argv[1];
+        for (int i = 2; i < argc; i++) {
+            args.args.push_back(argv[i]);
+        }
+    }
+    return args;
 }

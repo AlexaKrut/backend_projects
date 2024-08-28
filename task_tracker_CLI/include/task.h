@@ -12,8 +12,8 @@ struct Task {
     int id;
     string description;
     string status;
-    time_t createdAt;
-    time_t updatedAt;
+    string createdAt;
+    string updatedAt;
 };
 
 #endif  // TASK_H

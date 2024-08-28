@@ -1,0 +1,25 @@
+[
+    {
+        "id": 0,
+        "description": "Write a letter",
+        "status": "todo",
+        "createdAt": "2024-08-28 21:06:43",
+        "updatedAt": "2024-08-28 21:06:43"
+    }
+,
+    {
+        "id": 1,
+        "description": "Read book",
+        "status": "todo",
+        "createdAt": "2024-08-28 21:06:44",
+        "updatedAt": "2024-08-28 21:06:44"
+    }
+,
+    {
+        "id": 0,
+        "description": "Sleep",
+        "status": "todo",
+        "createdAt": "2024-08-28 22:22:43",
+        "updatedAt": "2024-08-28 22:22:43"
+    }
+]
