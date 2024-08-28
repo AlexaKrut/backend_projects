@@ -1,50 +1,26 @@
 #include <iostream>
+#include <string>
+#include "./include/cli.h"
 
 using namespace std;
 
-int main() {
-    int choice;
+int main(int argc, char* argv[]) {
+    if (argc > 1) {
+        CLI TaskManager;
 
-    cout << "Task Tracker Menue" << endl;
-    cout << "1. Add task" << endl;
-    cout << "2. Update task" << endl;
-    cout << "3. Delete task" << endl;
-    cout << "4. Mark a task as in progress" << endl;
-    cout << "5. Mark a task as done" << endl;
-    cout << "6. List all tasks" << endl;
-    cout << "7. List all tasks that are done" << endl;
-    cout << "8. List all tasks that are not done" << endl;
-    cout << "9. List all tasks that are in progress" << endl;
-    
-    cin >> choice;
-    switch (choice) {
-        case 1:
-        // Add task
-        break;
-        case 2:
-        // Update task
-        break;
-        case 3:
-        // Delete task
-        break;
-        case 4:
-        // Mark a task as in progress
-        break;
-        case 5:
-        // Mark a task as done
-        break;
-        case 6:
-        // List all tasks
-        break;
-        case 7:
-        // List all tasks that are done
-        break;
-        case 8:
-        // List all tasks that are not done
-        break;
-        case 9:
-        // List all tasks that are in progress
-        break;
+    } else {
+        cout << "You need to choose an option!!!" << endl;
+        cout << "Format:  <./task_tracker_CLI option data>" << endl;
+        cout << "Option variants:" << endl;
+        cout << "1. Add - add a new task" << endl;
+        cout << "2. Update - update task" << endl;
+        cout << "3. Delete - delete task" << endl;
+        cout << "4. Mark-in-progress - mark a task as in progress" << endl;
+        cout << "5. Mark-done - mark a task as done" << endl;
+        cout << "6. List - list all tasks" << endl;
+        cout << "7. List-done - list all tasks that are done" << endl;
+        cout << "8. List-undone - list all tasks that are not done" << endl;
+        cout << "9. List-in-progress - list all tasks that are in progress" << endl;
     }
     return 0;
 }
