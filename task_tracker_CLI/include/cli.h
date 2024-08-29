@@ -1,5 +1,3 @@
-// Заголовочный файл, содержащий определение класса CLI
-
 #ifndef CLI_H
 #define CLI_H
 
@@ -20,9 +18,7 @@ public:
     void updateTask(int id, string& description);
     void markInProgress(int id);
     void markDone(int id);
-    void listDoneTasks(const string& status);
-    void listTodoTask(const string& status);
-    void listTaskInProgres(const string& status);
+    void listTaskByStatus(const string &status);
 private:  
     vector<Task> tasks;
     string jsonFile;

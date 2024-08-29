@@ -1,5 +1,6 @@
 #include "../include/json.h"
 
+//Writes a Task object to a JSON file.
 void writeTaskToJson(struct Task task, const char* filename) {
     ifstream file(filename);
     string jsonContent((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
@@ -8,27 +9,28 @@ void writeTaskToJson(struct Task task, const char* filename) {
     size_t startPos = jsonContent.find_last_of('[') + 1;
     size_t endPos = jsonContent.find_last_of(']');
 
-    std::string newTaskJson =
+    string newTaskJson =
         "\n    {\n"
-        "        \"id\": " + std::to_string(task.id) + ",\n"
+        "        \"id\": " + to_string(task.id) + ",\n"
         "        \"description\": \"" + task.description + "\",\n"
         "        \"status\": \"" + task.status + "\",\n"
         "        \"createdAt\": \"" + task.createdAt + "\",\n"
         "        \"updatedAt\": \"" + task.updatedAt + "\"\n"
         "    }\n";
 
-    if (startPos != std::string::npos && endPos != std::string::npos) {
+    if (startPos != string::npos && endPos != string::npos) {
         jsonContent.insert(endPos, "," + newTaskJson);
     } else {
         jsonContent = "[" + newTaskJson + "]";
     }
 
-    std::ofstream fileOut(filename, std::ios::trunc);
+    ofstream fileOut(filename, ios::trunc);
     fileOut << jsonContent;
     fileOut.close();
 }
 
-vector<Task> parseJsonFile(const std::string& filename) {
+//Parses a JSON file and returns a vector of Task objects.
+vector<Task> parseJsonFile(const string& filename) {
     vector<Task> tasks;
 
     ifstream file(filename);
@@ -38,13 +40,13 @@ vector<Task> parseJsonFile(const std::string& filename) {
     size_t startPos = jsonContent.find('[') + 1;
     size_t endPos = jsonContent.find_last_of(']');
 
-    if (startPos != std::string::npos && endPos != std::string::npos) {
+    if (startPos != string::npos && endPos != string::npos) {
         string tasksJson = jsonContent.substr(startPos, endPos - startPos);
 
         size_t taskStartPos = 0;
         size_t taskEndPos = tasksJson.find('}');
 
-        while (taskEndPos != std::string::npos) {
+        while (taskEndPos != string::npos) {
             string taskJson = tasksJson.substr(taskStartPos, taskEndPos - taskStartPos + 1);
 
             Task task;

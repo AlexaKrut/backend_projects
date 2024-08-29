@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//Represents command line arguments.
 struct CommandLineArgs {
     string command;
     vector<string> args;
@@ -12,6 +13,23 @@ struct CommandLineArgs {
 
 CommandLineArgs parseCommandLineArgs(int argc, char* argv[]);
 
+/**
+ * The main entry point of the program.
+ * 
+ * @param argc The number of command line arguments.
+ * @param argv The array of command line arguments.
+ * 
+ * Example:
+ * ```
+ * $ ./task_manager add "New Task"
+ * $ ./task_manager list
+ * $ ./task_manager delete 1
+ * $ ./task_manager update 1 "Updated Task"
+ * $ ./task_manager mark-in-progress 1
+ * $ ./task_manager mark-done 1
+ * $ ./task_manager list in-progress
+ * ```
+ */
 int main(int argc, char* argv[]) {
     CommandLineArgs args  = parseCommandLineArgs(argc, argv);
     if (args.command.empty()) {
@@ -24,13 +42,12 @@ int main(int argc, char* argv[]) {
         else if (args.command == "update"){TaskManager.updateTask(stoi(args.args[0]), args.args[1]);}
         else if (args.command == "mark-in-progress"){TaskManager.markInProgress(stoi(args.args[0]));}
         else if (args.command == "mark-done"){TaskManager.markDone(stoi(args.args[0]));}
-        else if ((args.command == "list") && ((args.args[0]) == "done")){TaskManager.listDoneTasks(args.args[0]);}
-        else if ((args.command == "list") && ((args.args[0]) == "todo")){TaskManager.listTodoTask(args.args[0]);}
-        else if ((args.command == "list") && ((args.args[0]) == "in-progres")){TaskManager.listTaskInProgres(args.args[0]);}
+        else if (args.command == "list" && !args.args.empty()){TaskManager.listTaskByStatus(args.args[0]);}
         else {cout << "Error: Not find this command. You need to choose one of existing commands." << endl;}
     }
 }
 
+//Parses command line arguments.
 CommandLineArgs parseCommandLineArgs(int argc, char* argv[]) {
     CommandLineArgs args;
     if (argc > 1) {

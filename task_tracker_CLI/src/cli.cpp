@@ -1,7 +1,6 @@
 #include "../include/cli.h"
 
 void CLI::addTask(const string& description) {
-    // Add a new task to the task list
     Task newTask;
     newTask.id = getLastId("tasks.json") + 1;
     newTask.description = description;
@@ -31,23 +30,22 @@ void CLI::listTasks()
 
 void CLI::deleteTask(int id)
 {
-    // Delete a task from the task list
     vector<Task> updatedTasks;
     vector<Task> tasks = parseJsonFile("tasks.json");
-    for (int i = 1; i <= id;  i++) {
+    for (int i = 1; i < id;  i++) {
         if (i != id) {
             updatedTasks.push_back(tasks[i-1]);
         }
     }
-    for (int i = id; i < (int)tasks.size();  i++) {
-        tasks[i-1].id = i;
+    for (int i = id + 1; i <= (int)tasks.size();  i++) {
+        tasks[i - 1].id = i - 1;
         updatedTasks.push_back(tasks[i-1]);
     }
-    // Write the updated tasks to a temporary file
+
     for  (const auto& task : updatedTasks) {
         writeTaskToJson(task, "tasks.json.tmp");
     }
-    // Replace the original file with the temporary file
+
     remove("tasks.json");
     rename("tasks.json.tmp", "tasks.json");
 }
@@ -113,9 +111,9 @@ void CLI::markDone(int id)
     rename("tasks.json.tmp", "tasks.json");
 }
 
-void CLI::listDoneTasks(const string &status)
+void CLI::listTaskByStatus(const string &status)
 {
-    cout << "List of Done Tasks: " << endl;
+    cout << "List Of Tasks " << status << ":" << endl;
     vector<Task> tasks = parseJsonFile("tasks.json");
     for (const auto& task : tasks) {
         if (task.status == status) {
@@ -124,42 +122,6 @@ void CLI::listDoneTasks(const string &status)
             cout << "Task createdAt: " << task.createdAt << endl;
             cout << "Task updatedAt: " << task.updatedAt << endl;
             cout << endl;
-        } else {
-            cout << "Task has no description" << endl;
-        }
-    }
-}
-
-void CLI::listTodoTask(const string &status)
-{
-    cout << "List Tasks Todo: " << endl;
-    vector<Task> tasks = parseJsonFile("tasks.json");
-    for (const auto& task : tasks) {
-        if (task.status == status) {
-            cout << task.id <<  ". " << task.description << endl;
-            cout << "Task status: " << task.status << endl;
-            cout << "Task createdAt: " << task.createdAt << endl;
-            cout << "Task updatedAt: " << task.updatedAt << endl;
-            cout << endl;
-        } else {
-            cout << "Task has no description" << endl;
-        }
-    }
-}
-
-void CLI::listTaskInProgres(const string &status)
-{
-    cout << "List Tasks In Progres: " << endl;
-    vector<Task> tasks = parseJsonFile("tasks.json");
-    for (const auto& task : tasks) {
-        if (task.status == status) {
-            cout << task.id <<  ". " << task.description << endl;
-            cout << "Task status: " << task.status << endl;
-            cout << "Task createdAt: " << task.createdAt << endl;
-            cout << "Task updatedAt: " << task.updatedAt << endl;
-            cout << endl;
-        } else {
-            cout << "Task has no description" << endl;
         }
     }
 }

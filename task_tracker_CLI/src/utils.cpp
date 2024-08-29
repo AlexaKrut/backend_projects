@@ -1,5 +1,6 @@
 #include "../include/utils.h"
 
+//Returns the current time as a string in the format "YYYY-MM-DD HH:MM:SS".
 string getCurrentTime() {
     auto now = chrono::system_clock::now();
     time_t nowTimeT = std::chrono::system_clock::to_time_t(now);
@@ -11,6 +12,7 @@ string getCurrentTime() {
     return currentTime;
 }
 
+//Returns the last ID from a JSON file containing an array of tasks.
 int getLastId(const string& filename) {
     int maxId = 0;
     vector<Task> tasks = parseJsonFile(filename);
@@ -20,5 +22,4 @@ int getLastId(const string& filename) {
         } 
     }
     return maxId;
-
 }
