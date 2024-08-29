@@ -1,21 +1,38 @@
-Task Tracker CLI is a simple command-line interface (CLI) application that allows you to track and manage your tasks. You can add, update, and delete tasks, mark them as in progress or done, and list all tasks or tasks by status. Usage Adding a new task task-cli add "Task description"
+# Task Tracker
 
-Example: task-cli add "Buy groceries"
+Sample solution for the [task-tracker](https://roadmap.sh/projects/task-tracker) challenge from [roadmap.sh](https://roadmap.sh/).
 
-Updating a task task-cli update <task_id> "New task description"
+## How to run
 
-Example: task-cli update 1 "Buy groceries and cook dinner"
+Clone the repository and run the following command:
 
-Deleting a task task-cli delete <task_id>
+```bash
+git clone https://github.com/arikchakma/backend-projects.git
+cd backend-projects/task-tracker
+```
 
-Example: task-cli delete 1
+Run the following command to build the project:
 
-Marking a task as in progress or done task-cli mark-in-progress <task_id> task-cli mark-done <task_id>
+```bash
+make
 
-Example: task-cli mark-in-progress 1 task-cli mark-done 1
+# To add a task
+cli add "Buy groceries"
 
-Listing all tasks task-cli list
+# To update a task
+cli update 1 "Buy groceries and cook dinner"
 
-Listing tasks by status task-cli list
+# To delete a task
+cli delete 1
 
-Example: task-cli list done task-cli list todo task-cli list in-progress
+# To mark a task as in progress/done/todo
+cli mark-in-progress 1
+./task-tracker mark-done 1
+./task-tracker mark-todo 1
+
+# To list all tasks
+cli list
+cli list done
+cli list todo
+cli list in-progress
+```
