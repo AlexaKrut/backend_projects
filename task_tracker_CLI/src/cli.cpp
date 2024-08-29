@@ -24,3 +24,26 @@ void CLI::listTasks()
         }
     }
 }
+
+void CLI::deleteTask(int id)
+{
+    // Delete a task from the task list
+    vector<Task> updatedTasks;
+    vector<Task> tasks = parseJsonFile("tasks.json");
+    for (int i = 1; i <= id;  i++) {
+        if (i != id) {
+            updatedTasks.push_back(tasks[i-1]);
+        }
+    }
+    for (int i = id; i < (int)tasks.size();  i++) {
+        tasks[i-1].id = i;
+        updatedTasks.push_back(tasks[i-1]);
+    }
+    // Write the updated tasks to a temporary file
+    for  (const auto& task : updatedTasks) {
+        writeTaskToJson(task, "tasks.json.tmp");
+    }
+    // Replace the original file with the temporary file
+    remove("tasks.json");
+    rename("tasks.json.tmp", "tasks.json");
+}

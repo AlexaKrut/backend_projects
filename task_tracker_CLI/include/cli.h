@@ -16,9 +16,9 @@ class CLI {
 public:
     void addTask(const string& description);
     void listTasks();
+        void deleteTask(int id);
     /*
     void updateTask(int id, const string& description);
-    void deleteTask(int id);
     void markInProgress(int id);
     void markDone(int id);
     void listTasksByStatus(const string& status);

@@ -20,9 +20,9 @@ int main(int argc, char* argv[]) {
         CLI TaskManager;
         if (args.command == "add") {TaskManager.addTask(args.args[0]);}
         else if (args.command == "list"){TaskManager.listTasks();}
+        else if (args.command == "delete"){TaskManager.deleteTask(stoi(args.args[0]));} 
         /*
-        else if (args.command == "update"){}
-        else if (args.command == "delete"){}        
+        else if (args.command == "update"){}       
         else if (args.command == "mark-in-progress"){}
         else if (args.command == "mark-done"){}
 
