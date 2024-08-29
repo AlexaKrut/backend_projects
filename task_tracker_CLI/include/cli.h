@@ -16,13 +16,13 @@ class CLI {
 public:
     void addTask(const string& description);
     void listTasks();
-        void deleteTask(int id);
-    /*
-    void updateTask(int id, const string& description);
+    void deleteTask(int id);
+    void updateTask(int id, string& description);
     void markInProgress(int id);
     void markDone(int id);
-    void listTasksByStatus(const string& status);
-    */
+    void listDoneTasks(const string& status);
+    void listTodoTask(const string& status);
+    void listTaskInProgres(const string& status);
 private:  
     vector<Task> tasks;
     string jsonFile;
